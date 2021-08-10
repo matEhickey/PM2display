@@ -9,4 +9,5 @@ npx github:matEhickey/PM2display <logfile>
 Or:
 ```
 npm install --global github:matEhickey/PM2display
+pm2display <logfile>
 ```
