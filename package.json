@@ -11,7 +11,7 @@
     "install:front": "cd front && npm run install"
   },
   "bin": {
-    "pm2display": "src/back/index.js"
+    "pm2display": "back/index.js"
   },
   "author": "",
   "license": "ISC",
