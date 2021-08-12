@@ -1,29 +1,33 @@
 {
-  "name": "PM2display",
-  "version": "1.0.0",
+  "name": "pm2display",
+  "version": "1.0.1",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js --watch .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node back/index.js",
+    "dev": "concurrently \"npm run dev:front\" \"npm run dev:back\"",
+    "dev:back": "nodemon back/index.js --watch back",
+    "dev:front": "cd front && npm run dev",
+    "build:front": "cd front && npm run build",
+    "install:front": "cd front && npm run install"
   },
   "bin": {
-    "pm2display": "index.js"
+    "pm2display": "src/back/index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1"
   },
   "devDependencies": {
+    "concurrently": "^6.2.1",
     "eslint": "^7.27.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-mocha": "^9.0.0",
     "eslint-plugin-prettier": "^3.4.0",
-    "prettier-eslint": "^12.0.0",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "prettier-eslint": "^12.0.0"
   }
 }

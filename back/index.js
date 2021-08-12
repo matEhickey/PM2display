@@ -2,14 +2,15 @@
 
 const express = require("express");
 const fs = require("fs");
-const { name } = require("./package.json");
-const { formatLog, logTable } = require("./logTable");
-const layout = require("./layout");
+const cors = require("cors");
+const { name } = require("../package.json");
+const { formatLog } = require("./logTable");
 
 const app = express();
 const port = 7000;
+app.use(cors());
 
-const logfile = process.argv[2] || "./data/logs";
+const logfile = process.argv[2] || `${__dirname}/../data/logs`;
 if (!fs.existsSync(logfile)) {
   console.error(`Cant find: ${logfile}`);
   process.exit();
@@ -24,13 +25,14 @@ const getLogs = () => {
   return logs.map(formatLog);
 };
 
-app.get("/", (req, res) => {
-  const tableOfLogs = logTable(getLogs());
+app.use(express.static(`${__dirname}/../public`));
 
-  res.send(layout(name, tableOfLogs));
+app.get("/logs", (req, res) => {
+  const logs = getLogs();
+
+  res.send(logs);
 });
 
 app.listen(port, () => {
   console.log(`${name} running at http://localhost:${port}`);
-  console.log("reading log file:", logfile);
 });

@@ -1,0 +1,14 @@
+pipeline:
+  install:
+    image: node
+    script:
+      - npm install
+      - npm install:front
+      - npm run build:front
+  build:
+    image: node
+    script:
+      - npm run build:front
+    when:
+      branch:
+        - master
